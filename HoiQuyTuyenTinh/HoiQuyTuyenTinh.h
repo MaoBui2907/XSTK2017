@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <windowsx.h>
 #include <vector>
+#include <math.h>
 using namespace std;
 //Cấu trúc
 struct DATA
@@ -34,6 +35,8 @@ extern double mody;
 extern double phuongsaiy;
 extern double dlcx;
 extern double dlcy;
+extern double cov;
+extern double corr;
 extern vector<TANSUAT> tansuat;
 extern POINT c;
 extern HWND cs;
@@ -65,6 +68,8 @@ bool Kiemtra();
 void veBang(HWND wd);
 double TinhModX();
 double TinhModY();
+double TinhHiepPhuongSai();
+double TinhHeSoTuongQuan();
 //1008x636
 //Tin nhắn riêng
 #define WM_VECHAM WM_USER

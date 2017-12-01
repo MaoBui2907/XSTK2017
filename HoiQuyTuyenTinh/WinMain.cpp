@@ -16,6 +16,8 @@ double modx;
 double mody;
 double dlcx;
 double dlcy;
+double cov;
+double corr;
 POINT c;
 DATA change;
 vector<TANSUAT> tansuat;

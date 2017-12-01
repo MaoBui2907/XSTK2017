@@ -81,12 +81,12 @@ BOOL CALLBACK Dlg1Proc(HWND wd, UINT id, WPARAM w, LPARAM l)
 				else
 				{
 					k = false;
-					MessageBox(wd, L"", L"", MB_ICONERROR);
+					MessageBox(wd,L"Dữ liệu không chính xác", L"Lỗi", MB_ICONERROR);
 				}
 			}
 			else
 			{
-				MessageBox(wd, L"", L"", MB_ICONERROR);
+				MessageBox(wd, L"Dữ liệu không chính xác", L"Lỗi", MB_ICONERROR);
 			}
 		}
 		if (LOWORD(w) == IDC_BUTTON6)

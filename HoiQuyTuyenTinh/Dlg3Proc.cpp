@@ -58,10 +58,13 @@ BOOL CALLBACK Dlg3Proc(HWND wd, UINT id, WPARAM w, LPARAM l)
 			phuongsaix = sum / (size - 1);
 		}
 		//Độ lệch chuẩn
-		dlcx = pow(phuongsaix, 0.5);
+		dlcx = sqrt(phuongsaix);
 		// Mod 
 		modx = TinhModX();
-
+		//Cov:
+		
+		//Corr:
+		
 		//
 		//Tính cho Y
 		//Trị trung bình
@@ -86,9 +89,12 @@ BOOL CALLBACK Dlg3Proc(HWND wd, UINT id, WPARAM w, LPARAM l)
 			phuongsaiy = sum / (size - 1);
 		}
 		//Độ lệch chuẩn
-		dlcy = pow(phuongsaiy, 0.5);
+		dlcy = sqrt(phuongsaiy);
 		//Mod
 		mody = TinhModY();
+
+		cov = TinhHiepPhuongSai();
+		corr = TinhHeSoTuongQuan();
 
 		//Xuất
 		if (Button_GetCheck(GetDlgItem(wd, IDC_RADIO1)) == 1)

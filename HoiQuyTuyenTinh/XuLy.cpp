@@ -10,7 +10,14 @@ void XuatTSX()
 	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICVAR), buff); 
 	snprintf(buff, sizeof(buff), "%.2f", dlcx);
 	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICDLC), buff);
-	
+	snprintf(buff, sizeof(buff), "%.2f", modx);
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICMOD), buff);
+	snprintf(buff, sizeof(buff), "%d", dulieu.size());
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICN), buff);
+	snprintf(buff, sizeof(buff), "%.2f", cov);
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICCOV), buff);
+	snprintf(buff, sizeof(buff), "%.2f", corr);
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICCORR), buff);
 }
 void XuatTSY()
 {
@@ -22,6 +29,14 @@ void XuatTSY()
 	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICVAR), buff);
 	snprintf(buff, sizeof(buff), "%.2f", dlcy);
 	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICDLC), buff);
+	snprintf(buff, sizeof(buff), "%d", dulieu.size());
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICN), buff);
+	snprintf(buff, sizeof(buff), "%.2f", mody);
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICMOD), buff);
+	snprintf(buff, sizeof(buff), "%.2f", cov);
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICCOV), buff);
+	snprintf(buff, sizeof(buff), "%.2f", corr);
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICCORR), buff);
 }
 void timAB()
 {
@@ -166,3 +181,16 @@ double TinhModY() {
 	}
 	return flag.x;
 }
+double TinhHiepPhuongSai() {
+	double Exy = 0, Ex = 0, Ey = 0;
+	for (int i = 0; i < dulieu.size(); i++) {
+		Exy += dulieu[i].x * dulieu[i].y;
+	}
+	return Exy / dulieu.size() - ex*ey;
+}
+
+double TinhHeSoTuongQuan() {
+	return TinhHiepPhuongSai() / (dlcx*dlcy);
+}
+
+double XoaDuLieu

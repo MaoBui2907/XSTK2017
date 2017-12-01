@@ -54,6 +54,7 @@
 #define IDC_STATICD4                    1019
 #define IDC_CUSTOM1                     1019
 #define IDC_STATICD5                    1020
+#define IDC_STATICDC                    1020
 #define IDC_STATICD6                    1021
 #define IDC_STATICEE                    1022
 #define IDC_STATICVAR                   1023
@@ -61,6 +62,10 @@
 #define IDC_BUTTON8                     1025
 #define IDC_STATICHAM                   1026
 #define IDC_LIST1                       1029
+#define IDC_STATICCOV                   1030
+#define IDC_STATICCORR                  1031
+#define IDC_STATICMOD                   1032
+#define IDC_STATICN                     1033
 
 // Next default values for new objects
 // 
@@ -68,7 +73,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        140
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1030
+#define _APS_NEXT_CONTROL_VALUE         1034
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
