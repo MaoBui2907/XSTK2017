@@ -156,9 +156,26 @@ BOOL CALLBACK Dlg1Proc(HWND wd, UINT id, WPARAM w, LPARAM l)
 		}
 		if (LOWORD(w) == IDC_BUTTON4)
 		{
-
+			fstream f;
+			f.open("output.txt", ios::out);
+			for (int i = 0; i < dulieu.size(); i++) {
+				f << dulieu[i].x << " " << dulieu[i].y << "\n";
+			}
+			f.close();
+			MessageBox(wd, L"Đã xuất ra file output.txt", L"Thành công", MB_ICONINFORMATION);
+		}
+		if (LOWORD(w) == IDC_BUTTON9) {
+			dulieu.clear();
+			SendMessage(Dlg[1], WM_THEMDIEM, NULL, NULL);
+			VeOxy(Dlg[3]);
+			A.x = A.y = 0;
+			SetWindowTextA(GetDlgItem(wd, IDC_STATICHAM), "");
+		}
+		if (LOWORD(w) == IDC_BUTTON7) {
+			DialogBox(GetModuleHandle(0), MAKEINTRESOURCE(IDD_DIALOG7), wd, Dlg7Proc);
 		}
 		return 0;
+		
 	}
 	}
 	return 0;

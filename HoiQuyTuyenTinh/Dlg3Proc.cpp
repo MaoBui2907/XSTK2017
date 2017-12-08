@@ -95,7 +95,7 @@ BOOL CALLBACK Dlg3Proc(HWND wd, UINT id, WPARAM w, LPARAM l)
 
 		cov = TinhHiepPhuongSai();
 		corr = TinhHeSoTuongQuan();
-
+		hsbt = TinhHeSoBienThien();
 		//Xuất
 		if (Button_GetCheck(GetDlgItem(wd, IDC_RADIO1)) == 1)
 		{

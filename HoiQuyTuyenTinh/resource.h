@@ -24,6 +24,7 @@
 #define IDI_ICON11                      132
 #define IDD_DIALOG5                     136
 #define IDD_DIALOG6                     138
+#define IDD_DIALOG7                     140
 #define IDC_BUTTON1                     1004
 #define IDB_BIPMAP4                     1004
 #define IDC_BUTTON2                     1005
@@ -60,20 +61,24 @@
 #define IDC_STATICVAR                   1023
 #define IDC_STATICDLC                   1024
 #define IDC_BUTTON8                     1025
+#define IDC_STATICD7                    1025
 #define IDC_STATICHAM                   1026
+#define IDC_BUTTON9                     1027
 #define IDC_LIST1                       1029
 #define IDC_STATICCOV                   1030
 #define IDC_STATICCORR                  1031
 #define IDC_STATICMOD                   1032
 #define IDC_STATICN                     1033
+#define IDC_STATICBT                    1034
+#define IDC_COMBO1                      1034
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        140
+#define _APS_NEXT_RESOURCE_VALUE        142
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1034
+#define _APS_NEXT_CONTROL_VALUE         1035
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -7,6 +7,9 @@
 #include <windowsx.h>
 #include <vector>
 #include <math.h>
+#include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 //Cấu trúc
 struct DATA
@@ -20,6 +23,7 @@ struct TANSUAT
 	int tansuat;
 };
 //Khai báo biến chung
+extern double student[30][12];
 extern HWND Dlg[4];
 extern bool k;
 extern POINT tam;
@@ -37,6 +41,7 @@ extern double dlcx;
 extern double dlcy;
 extern double cov;
 extern double corr;
+extern double hsbt;
 extern vector<TANSUAT> tansuat;
 extern POINT c;
 extern HWND cs;
@@ -51,6 +56,7 @@ BOOL CALLBACK Dlg3Proc(HWND wd, UINT id, WPARAM w, LPARAM l);
 BOOL CALLBACK Dlg4Proc(HWND wd, UINT id, WPARAM w, LPARAM l);
 BOOL CALLBACK Dlg5Proc(HWND wd, UINT id, WPARAM w, LPARAM l);
 BOOL CALLBACK Dlg6Proc(HWND wd, UINT id, WPARAM w, LPARAM l);
+BOOL CALLBACK Dlg7Proc(HWND wd, UINT id, WPARAM w, LPARAM l);
 void DrawBmp(HWND wd, LPCWSTR id_bmp, int x, int y);
 void KichThuoc(HWND wd);
 void VeOxy(HWND wd);
@@ -70,6 +76,10 @@ double TinhModX();
 double TinhModY();
 double TinhHiepPhuongSai();
 double TinhHeSoTuongQuan();
+double TinhHeSoBienThien();
+double TichPhanBeta(double,double);
+void DocStudent();
+void GhiFile();
 //1008x636
 //Tin nhắn riêng
 #define WM_VECHAM WM_USER

@@ -98,56 +98,60 @@ void drawPoint(HDC dc, float x, float y, COLORREF C)
 // vẽ y=ax+b:
 void drawLine(HWND wd, float a, float b)
 {
-	POINT A, B;
-	float maxX, maxY, minX, minY;
-	minX = (0 - tam.x) / gPixel;
-	minY = -(448 + 45 - tam.y) / gPixel;
-	maxX = (488 - tam.x) / gPixel;
-	maxY = -(45 - tam.y) / gPixel;
-	if (a >= 0) {
-		if (minY > (a*minX + b)) {
-			float temp = (minY - b) / a;
-			A = getLocateFromCoord(temp, minY);
+	if (a == 0 && b == 0) {
+		return;
+	}else {
+		POINT A, B;
+		float maxX, maxY, minX, minY;
+		minX = (0 - tam.x) / gPixel;
+		minY = -(448 + 45 - tam.y) / gPixel;
+		maxX = (488 - tam.x) / gPixel;
+		maxY = -(45 - tam.y) / gPixel;
+		if (a >= 0) {
+			if (minY > (a*minX + b)) {
+				float temp = (minY - b) / a;
+				A = getLocateFromCoord(temp, minY);
+			}
+			else {
+				float temp = minX * a + b;
+				A = getLocateFromCoord(minX, temp);
+			}
+			if (maxY > (a*maxX + b)) {
+				float temp = maxX * a + b;
+				B = getLocateFromCoord(maxX, temp);
+			}
+			else {
+				float temp = (maxY - b) / a;
+				B = getLocateFromCoord(temp, maxY);
+			}
 		}
 		else {
-			float temp = minX * a + b;
-			A = getLocateFromCoord(minX, temp);
+			if (minY > (a*maxX + b)) {
+				float temp = (minY - b) / a;
+				A = getLocateFromCoord(temp, minY);
+			}
+			else {
+				float temp = maxX * a + b;
+				A = getLocateFromCoord(maxX, temp);
+			}
+			if (maxY > (a*minX + b)) {
+				float temp = minX * a + b;
+				B = getLocateFromCoord(minX, temp);
+			}
+			else {
+				float temp = (maxY - b) / a;
+				B = getLocateFromCoord(temp, maxY);
+			}
 		}
-		if (maxY > (a*maxX + b)) {
-			float temp = maxX * a + b;
-			B = getLocateFromCoord(maxX, temp);
-		}
-		else {
-			float temp = (maxY - b) / a;
-			B = getLocateFromCoord(temp, maxY);
-		}
+		HDC dc = GetDC(wd);
+		HPEN oldPen, currentPen;
+		currentPen = CreatePen(PS_SOLID, 3, RGB(8, 2, 230));
+		oldPen = (HPEN)SelectObject(dc, currentPen);
+		MoveToEx(dc, A.x, A.y, NULL);
+		LineTo(dc, B.x, B.y);
+		DeleteObject(currentPen);
+		ReleaseDC(wd, dc);
 	}
-	else {
-		if (minY > (a*maxX + b)) {
-			float temp = (minY - b) / a;
-			A = getLocateFromCoord(temp, minY);
-		}
-		else {
-			float temp = maxX * a + b;
-			A = getLocateFromCoord(maxX, temp);
-		}
-		if (maxY > (a*minX + b)) {
-			float temp = minX * a + b;
-			B = getLocateFromCoord(minX, temp);
-		}
-		else {
-			float temp = (maxY - b) / a;
-			B = getLocateFromCoord(temp, maxY);
-		}
-	}
-	HDC dc = GetDC(wd);
-	HPEN oldPen, currentPen;
-	currentPen = CreatePen(PS_SOLID, 3, RGB(8, 2, 230));
-	oldPen = (HPEN)SelectObject(dc, currentPen);
-	MoveToEx(dc, A.x, A.y, NULL);
-	LineTo(dc, B.x, B.y);
-	DeleteObject(currentPen);
-	ReleaseDC(wd, dc);
 }
 void VeCham(HWND wd)
 {

@@ -30,6 +30,7 @@
     <ClCompile Include="Dlg4Proc.cpp" />
     <ClCompile Include="Dlg5Proc.cpp" />
     <ClCompile Include="Dlg6Proc.cpp" />
+    <ClCompile Include="Dlg7Proc.cpp" />
     <ClCompile Include="DoHoa.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="WinProc.cpp" />

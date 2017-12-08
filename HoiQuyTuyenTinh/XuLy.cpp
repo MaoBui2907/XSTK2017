@@ -18,6 +18,8 @@ void XuatTSX()
 	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICCOV), buff);
 	snprintf(buff, sizeof(buff), "%.2f", corr);
 	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICCORR), buff);
+	snprintf(buff, sizeof(buff), "%.0f%%", hsbt*100);
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICBT), buff);
 }
 void XuatTSY()
 {
@@ -37,6 +39,8 @@ void XuatTSY()
 	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICCOV), buff);
 	snprintf(buff, sizeof(buff), "%.2f", corr);
 	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICCORR), buff);
+	snprintf(buff, sizeof(buff), "%.0f%%", hsbt*100);
+	SetWindowTextA(GetDlgItem(Dlg[2], IDC_STATICBT), buff);
 }
 void timAB()
 {
@@ -102,95 +106,278 @@ bool Kiemtra()
 	return false;
 }
 double TinhModX() {
-	vector<DATA> tansuatx;
-	int size = dulieu.size();
-	for (int i = 0; i < size; i++)
-	{
-		if (tansuatx.empty())
-		{
-			DATA buff;
-			buff.x = dulieu[i].x;
-			buff.y = 1;
-			tansuatx.push_back(buff);
-		}
-		else
-		{
-			bool u = false;
-			for (int j = 0; j < tansuatx.size(); j++)
-			{
-				if (dulieu[i].x == tansuatx[j].x)
-				{
-					tansuatx[j].y++;
-					u = true;
-				}
-			}
-			if (!u)
-			{
-				DATA buff;
-				buff.x = dulieu[i].x;
-				buff.y = 1;
-				tansuatx.push_back(buff);
+	double *dbTempX;
+	dbTempX = new double[dulieu.size()];
+	for (int i = 0; i < dulieu.size(); i++) {
+		dbTempX[i] = dulieu[i].x;
+	}
+	for (int i = 0; i < dulieu.size() - 1; i++) {
+		for (int j = i + 1; j < dulieu.size(); j++) {
+			if (dbTempX[i] > dbTempX[j]) {
+				double temp = dbTempX[i];
+				dbTempX[i] = dbTempX[j];
+				dbTempX[j] = temp;
 			}
 		}
 	}
-	DATA flag = tansuatx[0];
-	for (int i = 1; i < tansuatx.size(); i++) {
-		if (tansuatx[i].y > flag.y) {
-			flag = tansuatx[i];
-		}
+	if (dulieu.size() % 2 == 0) {
+		return 0.5*(dbTempX[dulieu.size() / 2 - 1] + dbTempX[dulieu.size() / 2]);
 	}
-	return flag.x;
+	else {
+		return dbTempX[(dulieu.size() + 1) / 2 - 1];
+	}
 }
 double TinhModY() {
-	vector<DATA> tansuaty;
-	int size = dulieu.size();
-	for (int i = 0; i < size; i++)
-	{
-		if (tansuaty.empty())
-		{
-			DATA buff;
-			buff.x = dulieu[i].y;
-			buff.y = 1;
-			tansuaty.push_back(buff);
-		}
-		else
-		{
-			bool u = false;
-			for (int j = 0; j < tansuaty.size(); j++)
-			{
-				if (dulieu[i].y == tansuaty[j].x)
-				{
-					tansuaty[j].y++;
-					u = true;
-				}
-			}
-			if (!u)
-			{
-				DATA buff;
-				buff.x = dulieu[i].y;
-				buff.y = 1;
-				tansuaty.push_back(buff);
+	double *dbTempX;
+	dbTempX = new double[dulieu.size()];
+	for (int i = 0; i < dulieu.size(); i++) {
+		dbTempX[i] = dulieu[i].y;
+	}
+	for (int i = 0; i < dulieu.size() - 1; i++) {
+		for (int j = i + 1; j < dulieu.size(); j++) {
+			if (dbTempX[i] > dbTempX[j]) {
+				double temp = dbTempX[i];
+				dbTempX[i] = dbTempX[j];
+				dbTempX[j] = temp;
 			}
 		}
 	}
-	DATA flag = tansuaty[0];
-	for (int i = 1; i < tansuaty.size(); i++) {
-		if (tansuaty[i].y > flag.y) {
-			flag = tansuaty[i];
-		}
+	if (dulieu.size() % 2 == 0) {
+		return 0.5*(dbTempX[dulieu.size() / 2 - 1] + dbTempX[dulieu.size() / 2]);
 	}
-	return flag.x;
+	else {
+		return dbTempX[(dulieu.size() + 1) / 2 - 1];
+	}
 }
 double TinhHiepPhuongSai() {
-	double Exy = 0, Ex = 0, Ey = 0;
+	double temp = 0;
 	for (int i = 0; i < dulieu.size(); i++) {
-		Exy += dulieu[i].x * dulieu[i].y;
+		temp += (dulieu[i].x - ex)*(dulieu[i].y - ey);
 	}
-	return Exy / dulieu.size() - ex*ey;
+	return temp / (dulieu.size() - 1);
 }
 
 double TinhHeSoTuongQuan() {
 	return TinhHiepPhuongSai() / (dlcx*dlcy);
 }
+double TinhHeSoBienThien() {
+	timAB();
+	double temp1 = 0, temp2 = 0;
+	for (int i = 0; i < dulieu.size(); i++) {
+		temp1 += pow((A.x * dulieu[i].x + A.y - ey), 2);
+		temp2 += pow(dulieu[i].y - ey, 2);
+	}
+	return temp1 / temp2;
+}
+double DaoHambeta(double x, double y,double t) {
+	return (x - 1)*pow(t, x - 2)*pow(1 - t, y - 1) - pow(t, x - 1)*(y - 1)*pow(1 - t, y - 2);
+}
+double Beta(double x, double y,double a) {
+	return pow(a, x - 1)*pow(1 - a, y - 1);
+}
+double TichPhanBeta(double a, double b) {
+	/*if (abs(DaoHambeta(1 / 2, (dulieu.size() - 1) / 2, a) - DaoHambeta(1 / 2, (dulieu.size() - 1) / 2, b)) < 10) {
+		return (abs(b - a)*(Beta(1 / 2, (dulieu.size() - 1) / 2, a) + Beta(1 / 2, (dulieu.size() - 1) / 2, b)))/2;
+	}*/
+	if (abs(b-a)<0.5) {
+		return (abs(b - a)*(Beta(1 / 2, (dulieu.size() - 1) / 2, a) + Beta(1 / 2, (dulieu.size() - 1) / 2, b))) / 2;
+	}
+	double s1 = TichPhanBeta(a, (a + b) / 2);
+	double s2 = TichPhanBeta((a + b) / 2, b);
+	return s1 + s2;
+}
+DATA ChuyenDoi(double a) {
+	DATA dtTemp;
+		if (a == 0.25) {
+			dtTemp.x = 0;
+			dtTemp.y = 0;
+		}
+		else {
+			if (a == 0.2) {
+				dtTemp.x = 1;
+				dtTemp.y = 1;
+			}
+			else {
+				if (a == 0.15) {
+					dtTemp.x = 2;
+					dtTemp.y = 2;
+				}
+				else {
+					if (a == 0.1) {
+						dtTemp.x = 3;
+						dtTemp.y = 3;
+					}
+					else {
+						if (a == 0.05) {
+							dtTemp.x = 4;
+							dtTemp.y = 4;
+						}
+						else {
+							if (a == 0.025) {
+								dtTemp.x = 5;
+								dtTemp.y = 5;
+							}
+							else {
+								if (a == 0.02) {
+									dtTemp.x = 6;
+									dtTemp.y = 6;
+								}
+								else {
+									if (a == 0.01) {
+										dtTemp.x = 7;
+										dtTemp.y = 7;
+									}
+									else {
+										if (a == 0.005) {
+											dtTemp.x = 8;
+											dtTemp.y = 8;
+										}
+										else {
+											if (a == 0.0025) {
+												dtTemp.x = 9;
+												dtTemp.y = 9;
+											}
+											else {
+												if (a == 0.001) {
+													dtTemp.x = 10;
+													dtTemp.y = 10;
+												}
+												else {
+													if (a == 0.0005) {
+														dtTemp.x = 11;
+														dtTemp.y = 11;
+													}
+													else {
+														if (a > 0.25&&a < 0.0005) {
+															dtTemp.x = -1;
+															dtTemp.y = -1;
+														}
+														else {
+															if (a < 0.25 && a> 0.2) {
+																dtTemp.x = 0;
+																dtTemp.y = 1;
+															}
+															else
+															{
+																if (a < 0.2 && a> 0.15) {
+																	dtTemp.x = 1;
+																	dtTemp.y = 2;
+																}
+																else
+																{
+																	if (a < 0.15 && a> 0.1) {
+																		dtTemp.x = 2;
+																		dtTemp.y = 3;
+																	}
+																	else
+																	{
+																		if (a < 0.1 && a> 0.05) {
+																			dtTemp.x = 3;
+																			dtTemp.y = 4;
+																		}
+																		else
+																		{
+																			if (a < 0.05 && a> 0.025) {
+																				dtTemp.x = 4;
+																				dtTemp.y = 5;
+																			}
+																			else
+																			{
+																				if (a < 0.025 && a> 0.02) {
+																					dtTemp.x = 5;
+																					dtTemp.y = 6;
+																				}
+																				else
+																				{
+																					if (a < 0.02 && a> 0.01) {
+																						dtTemp.x = 6;
+																						dtTemp.y = 7;
+																					}
+																					else
+																					{
+																						if (a < 0.01 && a> 0.005) {
+																							dtTemp.x = 7;
+																							dtTemp.y = 8;
+																						}
+																						else
+																						{
+																							if (a < 0.005 && a> 0.0025) {
+																								dtTemp.x = 8;
+																								dtTemp.y = 9;
+																							}
+																							else
+																							{
+																								if (a < 0.0025 && a> 0.001) {
+																									dtTemp.x = 9;
+																									dtTemp.y = 10;
+																								}
+																								else
+																								{
+																									if (a < 0.001 && a> 0.0005) {
+																										dtTemp.x = 10;
+																										dtTemp.y = 11;
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+}
 
-double XoaDuLieu
+void DocStudent() {
+	FILE* f;
+	fopen_s(&f, "student.txt", "rb");
+	if (f == NULL)
+	{
+		MessageBox(NULL, L"Mất student.txt", L"Lỗi", MB_ICONERROR);
+	}
+	else
+	{
+		char buff1[20];
+		int i = 0;
+		int j = 0;
+		while (true)
+		{
+			buff1[i] = fgetc(f);
+			if (buff1[i] == -1) break;
+			if (buff1[i] == 32)
+			{
+				buff1[i] = 0;
+				student[i][j] = strtod(buff1, NULL);
+				i = -1;
+				ZeroMemory(buff1, strlen(buff1));
+			}
+			if (buff1[i] == 13)
+			{
+				j++;
+				i = -1;
+			}
+			i++;
+		}
+		fclose(f);
+	}
+}
+void GhiFile() {
+	
+	char buff[6];
+	snprintf(buff, 6, "%5f ", student[0][0]);
+	MessageBoxA(NULL, buff, "", MB_OK);
+}

@@ -56,6 +56,9 @@
     <ClCompile Include="Dlg6Proc.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Dlg7Proc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HoiQuyTuyenTinh.rc">
