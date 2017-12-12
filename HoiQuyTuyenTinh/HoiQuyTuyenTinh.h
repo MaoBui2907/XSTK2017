@@ -1,5 +1,8 @@
 ﻿#pragma comment(lib, "Winmm.lib")
 #pragma comment(lib, "Comctl32.lib")
+#pragma comment(lib, "Ws2_32.lib")
+#pragma warning(disable : 4996)
+#include <winsock2.h>
 #include <windows.h> 
 #include <commctrl.h>
 #include <stdio.h>
@@ -10,6 +13,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ws2tcpip.h>
+#define DEFAULT_PORT "27015"
+
 using namespace std;
 //Cấu trúc
 struct DATA
@@ -77,9 +83,11 @@ double TinhModY();
 double TinhHiepPhuongSai();
 double TinhHeSoTuongQuan();
 double TinhHeSoBienThien();
-double TichPhanBeta(double,double);
-void DocStudent();
-void GhiFile();
+//double TichPhanBeta(double,double);
+//void DocStudent();
+//void GhiFile();
+double PhanPhoi(char*, int, char*);
+char* XuatPhanPhoi(double, double, double);
 //1008x636
 //Tin nhắn riêng
 #define WM_VECHAM WM_USER

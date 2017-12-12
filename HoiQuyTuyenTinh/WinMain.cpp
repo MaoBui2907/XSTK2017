@@ -25,6 +25,8 @@ DATA change;
 vector<TANSUAT> tansuat;
 int WINAPI WinMain(HINSTANCE a, HINSTANCE b, LPSTR c, int d)
 {
+	WSADATA wsaData;
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
 	WNDCLASS lcs;
 	MSG td;
 	lcs.style = 0;
@@ -40,12 +42,13 @@ int WINAPI WinMain(HINSTANCE a, HINSTANCE b, LPSTR c, int d)
 	cs = CreateWindow(L"LCS", TEN_UNG_DUNG, WS_OVERLAPPED|WS_BORDER|WS_MINIMIZEBOX|WS_CAPTION|WS_SYSMENU, 100, 100, 1000, 800, HWND_DESKTOP, NULL, a, NULL);
 	ShowWindow(cs, d);
 	UpdateWindow(cs);
-	DocStudent();
-	GhiFile();
+	/*DocStudent();
+	GhiFile();*/
 	while (GetMessage(&td, NULL, 0, 0) > 0)
 	{
 		TranslateMessage(&td);
 		DispatchMessage(&td);
 	}
+	WSACleanup();
 	return 0;
 }

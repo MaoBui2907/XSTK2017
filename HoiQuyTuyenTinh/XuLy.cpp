@@ -169,215 +169,252 @@ double TinhHeSoBienThien() {
 	}
 	return temp1 / temp2;
 }
-double DaoHambeta(double x, double y,double t) {
-	return (x - 1)*pow(t, x - 2)*pow(1 - t, y - 1) - pow(t, x - 1)*(y - 1)*pow(1 - t, y - 2);
-}
-double Beta(double x, double y,double a) {
-	return pow(a, x - 1)*pow(1 - a, y - 1);
-}
-double TichPhanBeta(double a, double b) {
-	/*if (abs(DaoHambeta(1 / 2, (dulieu.size() - 1) / 2, a) - DaoHambeta(1 / 2, (dulieu.size() - 1) / 2, b)) < 10) {
-		return (abs(b - a)*(Beta(1 / 2, (dulieu.size() - 1) / 2, a) + Beta(1 / 2, (dulieu.size() - 1) / 2, b)))/2;
-	}*/
-	if (abs(b-a)<0.5) {
-		return (abs(b - a)*(Beta(1 / 2, (dulieu.size() - 1) / 2, a) + Beta(1 / 2, (dulieu.size() - 1) / 2, b))) / 2;
+//double DaoHambeta(double x, double y,double t) {
+//	return (x - 1)*pow(t, x - 2)*pow(1 - t, y - 1) - pow(t, x - 1)*(y - 1)*pow(1 - t, y - 2);
+//}
+//double Beta(double x, double y,double a) {
+//	return pow(a, x - 1)*pow(1 - a, y - 1);
+//}
+//double TichPhanBeta(double a, double b) {
+//	/*if (abs(DaoHambeta(1 / 2, (dulieu.size() - 1) / 2, a) - DaoHambeta(1 / 2, (dulieu.size() - 1) / 2, b)) < 10) {
+//		return (abs(b - a)*(Beta(1 / 2, (dulieu.size() - 1) / 2, a) + Beta(1 / 2, (dulieu.size() - 1) / 2, b)))/2;
+//	}*/
+//	if (abs(b-a)<0.5) {
+//		return (abs(b - a)*(Beta(1 / 2, (dulieu.size() - 1) / 2, a) + Beta(1 / 2, (dulieu.size() - 1) / 2, b))) / 2;
+//	}
+//	double s1 = TichPhanBeta(a, (a + b) / 2);
+//	double s2 = TichPhanBeta((a + b) / 2, b);
+//	return s1 + s2;
+//}
+//DATA ChuyenDoi(double a) {
+//	DATA dtTemp;
+//		if (a == 0.25) {
+//			dtTemp.x = 0;
+//			dtTemp.y = 0;
+//		}
+//		else {
+//			if (a == 0.2) {
+//				dtTemp.x = 1;
+//				dtTemp.y = 1;
+//			}
+//			else {
+//				if (a == 0.15) {
+//					dtTemp.x = 2;
+//					dtTemp.y = 2;
+//				}
+//				else {
+//					if (a == 0.1) {
+//						dtTemp.x = 3;
+//						dtTemp.y = 3;
+//					}
+//					else {
+//						if (a == 0.05) {
+//							dtTemp.x = 4;
+//							dtTemp.y = 4;
+//						}
+//						else {
+//							if (a == 0.025) {
+//								dtTemp.x = 5;
+//								dtTemp.y = 5;
+//							}
+//							else {
+//								if (a == 0.02) {
+//									dtTemp.x = 6;
+//									dtTemp.y = 6;
+//								}
+//								else {
+//									if (a == 0.01) {
+//										dtTemp.x = 7;
+//										dtTemp.y = 7;
+//									}
+//									else {
+//										if (a == 0.005) {
+//											dtTemp.x = 8;
+//											dtTemp.y = 8;
+//										}
+//										else {
+//											if (a == 0.0025) {
+//												dtTemp.x = 9;
+//												dtTemp.y = 9;
+//											}
+//											else {
+//												if (a == 0.001) {
+//													dtTemp.x = 10;
+//													dtTemp.y = 10;
+//												}
+//												else {
+//													if (a == 0.0005) {
+//														dtTemp.x = 11;
+//														dtTemp.y = 11;
+//													}
+//													else {
+//														if (a > 0.25&&a < 0.0005) {
+//															dtTemp.x = -1;
+//															dtTemp.y = -1;
+//														}
+//														else {
+//															if (a < 0.25 && a> 0.2) {
+//																dtTemp.x = 0;
+//																dtTemp.y = 1;
+//															}
+//															else
+//															{
+//																if (a < 0.2 && a> 0.15) {
+//																	dtTemp.x = 1;
+//																	dtTemp.y = 2;
+//																}
+//																else
+//																{
+//																	if (a < 0.15 && a> 0.1) {
+//																		dtTemp.x = 2;
+//																		dtTemp.y = 3;
+//																	}
+//																	else
+//																	{
+//																		if (a < 0.1 && a> 0.05) {
+//																			dtTemp.x = 3;
+//																			dtTemp.y = 4;
+//																		}
+//																		else
+//																		{
+//																			if (a < 0.05 && a> 0.025) {
+//																				dtTemp.x = 4;
+//																				dtTemp.y = 5;
+//																			}
+//																			else
+//																			{
+//																				if (a < 0.025 && a> 0.02) {
+//																					dtTemp.x = 5;
+//																					dtTemp.y = 6;
+//																				}
+//																				else
+//																				{
+//																					if (a < 0.02 && a> 0.01) {
+//																						dtTemp.x = 6;
+//																						dtTemp.y = 7;
+//																					}
+//																					else
+//																					{
+//																						if (a < 0.01 && a> 0.005) {
+//																							dtTemp.x = 7;
+//																							dtTemp.y = 8;
+//																						}
+//																						else
+//																						{
+//																							if (a < 0.005 && a> 0.0025) {
+//																								dtTemp.x = 8;
+//																								dtTemp.y = 9;
+//																							}
+//																							else
+//																							{
+//																								if (a < 0.0025 && a> 0.001) {
+//																									dtTemp.x = 9;
+//																									dtTemp.y = 10;
+//																								}
+//																								else
+//																								{
+//																									if (a < 0.001 && a> 0.0005) {
+//																										dtTemp.x = 10;
+//																										dtTemp.y = 11;
+//																									}
+//																								}
+//																							}
+//																						}
+//																					}
+//																				}
+//																			}
+//																		}
+//																	}
+//																}
+//															}
+//														}
+//													}
+//												}
+//											}
+//										}
+//									}
+//								}
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//}
+
+//void DocStudent() {
+//	FILE* f;
+//	fopen_s(&f, "student.txt", "rb");
+//	if (f == NULL)
+//	{
+//		MessageBox(NULL, L"Mất student.txt", L"Lỗi", MB_ICONERROR);
+//	}
+//	else
+//	{
+//		char buff1[20];
+//		int i = 0;
+//		int j = 0;
+//		while (true)
+//		{
+//			buff1[i] = fgetc(f);
+//			if (buff1[i] == -1) break;
+//			if (buff1[i] == 32)
+//			{
+//				buff1[i] = 0;
+//				student[i][j] = strtod(buff1, NULL);
+//				i = -1;
+//				ZeroMemory(buff1, strlen(buff1));
+//			}
+//			if (buff1[i] == 13)
+//			{
+//				j++;
+//				i = -1;
+//			}
+//			i++;
+//		}
+//		fclose(f);
+//	}
+//}
+//void GhiFile() {
+//	
+//	char buff[6];
+//	snprintf(buff, 6, "%5f ", student[0][0]);
+//	MessageBoxA(NULL, buff, "", MB_OK);
+//}
+double PhanPhoi(char* pp, int bac, char* dtc) {
+	
+	SOCKET s = socket(AF_INET, SOCK_STREAM, 0);
+	sockaddr_in server;
+	server.sin_addr.s_addr = inet_addr("103.243.107.103");
+	server.sin_port = htons(80);
+	server.sin_family = AF_INET;
+	connect(s, (sockaddr*)&server, sizeof(server));
+	char sendbuff[100];
+	char* recvbuff = new char[1000];
+	wsprintfA(sendbuff, "GET /thongke?pp=%s&bac=%d&dtc=%s HTTP/1.1\r\nHost: www.tuyetsonphiho.tk\r\n\r\n", pp, bac, dtc);
+	send(s, sendbuff, strlen(sendbuff), 0);
+	int kt = recv(s, recvbuff, 1000, 0);
+	recvbuff[kt] = 0;
+	closesocket(s);
+	char* a = new char[6];
+	if (recvbuff[kt - 13] == '\n') {
+		for (int i = 0; i < 5; i++) {
+			a[i] = recvbuff[kt - 13 + i + 1];
+		}
 	}
-	double s1 = TichPhanBeta(a, (a + b) / 2);
-	double s2 = TichPhanBeta((a + b) / 2, b);
-	return s1 + s2;
-}
-DATA ChuyenDoi(double a) {
-	DATA dtTemp;
-		if (a == 0.25) {
-			dtTemp.x = 0;
-			dtTemp.y = 0;
+	else {
+		for (int i = 0; i < 6; i++) {
+			a[i] = recvbuff[kt - 13 + i];
 		}
-		else {
-			if (a == 0.2) {
-				dtTemp.x = 1;
-				dtTemp.y = 1;
-			}
-			else {
-				if (a == 0.15) {
-					dtTemp.x = 2;
-					dtTemp.y = 2;
-				}
-				else {
-					if (a == 0.1) {
-						dtTemp.x = 3;
-						dtTemp.y = 3;
-					}
-					else {
-						if (a == 0.05) {
-							dtTemp.x = 4;
-							dtTemp.y = 4;
-						}
-						else {
-							if (a == 0.025) {
-								dtTemp.x = 5;
-								dtTemp.y = 5;
-							}
-							else {
-								if (a == 0.02) {
-									dtTemp.x = 6;
-									dtTemp.y = 6;
-								}
-								else {
-									if (a == 0.01) {
-										dtTemp.x = 7;
-										dtTemp.y = 7;
-									}
-									else {
-										if (a == 0.005) {
-											dtTemp.x = 8;
-											dtTemp.y = 8;
-										}
-										else {
-											if (a == 0.0025) {
-												dtTemp.x = 9;
-												dtTemp.y = 9;
-											}
-											else {
-												if (a == 0.001) {
-													dtTemp.x = 10;
-													dtTemp.y = 10;
-												}
-												else {
-													if (a == 0.0005) {
-														dtTemp.x = 11;
-														dtTemp.y = 11;
-													}
-													else {
-														if (a > 0.25&&a < 0.0005) {
-															dtTemp.x = -1;
-															dtTemp.y = -1;
-														}
-														else {
-															if (a < 0.25 && a> 0.2) {
-																dtTemp.x = 0;
-																dtTemp.y = 1;
-															}
-															else
-															{
-																if (a < 0.2 && a> 0.15) {
-																	dtTemp.x = 1;
-																	dtTemp.y = 2;
-																}
-																else
-																{
-																	if (a < 0.15 && a> 0.1) {
-																		dtTemp.x = 2;
-																		dtTemp.y = 3;
-																	}
-																	else
-																	{
-																		if (a < 0.1 && a> 0.05) {
-																			dtTemp.x = 3;
-																			dtTemp.y = 4;
-																		}
-																		else
-																		{
-																			if (a < 0.05 && a> 0.025) {
-																				dtTemp.x = 4;
-																				dtTemp.y = 5;
-																			}
-																			else
-																			{
-																				if (a < 0.025 && a> 0.02) {
-																					dtTemp.x = 5;
-																					dtTemp.y = 6;
-																				}
-																				else
-																				{
-																					if (a < 0.02 && a> 0.01) {
-																						dtTemp.x = 6;
-																						dtTemp.y = 7;
-																					}
-																					else
-																					{
-																						if (a < 0.01 && a> 0.005) {
-																							dtTemp.x = 7;
-																							dtTemp.y = 8;
-																						}
-																						else
-																						{
-																							if (a < 0.005 && a> 0.0025) {
-																								dtTemp.x = 8;
-																								dtTemp.y = 9;
-																							}
-																							else
-																							{
-																								if (a < 0.0025 && a> 0.001) {
-																									dtTemp.x = 9;
-																									dtTemp.y = 10;
-																								}
-																								else
-																								{
-																									if (a < 0.001 && a> 0.0005) {
-																										dtTemp.x = 10;
-																										dtTemp.y = 11;
-																									}
-																								}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+	}
+	return atof(a);
 }
 
-void DocStudent() {
-	FILE* f;
-	fopen_s(&f, "student.txt", "rb");
-	if (f == NULL)
-	{
-		MessageBox(NULL, L"Mất student.txt", L"Lỗi", MB_ICONERROR);
-	}
-	else
-	{
-		char buff1[20];
-		int i = 0;
-		int j = 0;
-		while (true)
-		{
-			buff1[i] = fgetc(f);
-			if (buff1[i] == -1) break;
-			if (buff1[i] == 32)
-			{
-				buff1[i] = 0;
-				student[i][j] = strtod(buff1, NULL);
-				i = -1;
-				ZeroMemory(buff1, strlen(buff1));
-			}
-			if (buff1[i] == 13)
-			{
-				j++;
-				i = -1;
-			}
-			i++;
-		}
-		fclose(f);
-	}
-}
-void GhiFile() {
-	
-	char buff[6];
-	snprintf(buff, 6, "%5f ", student[0][0]);
-	MessageBoxA(NULL, buff, "", MB_OK);
+char* XuatPhanPhoi(double z, double e, double dlc) {
+	double temp1, temp2;
+	temp1 = e - z*(dlc / sqrt(dulieu.size()));
+	temp2 = e + z*(dlc / sqrt(dulieu.size()));
+	char* a = new char[30];
+	snprintf(a,30, "[%g;%g]", temp1, temp2);
+	return a;
 }
