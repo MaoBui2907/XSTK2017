@@ -6,10 +6,9 @@ BOOL CALLBACK Dlg7Proc(HWND wd, UINT id, WPARAM w, LPARAM l)
 	{
 	case WM_INITDIALOG:
 	{
-		ComboBox_AddString(GetDlgItem(wd, IDC_COMBO1), L"Trung bình của tồng thể X");
-		ComboBox_AddString(GetDlgItem(wd, IDC_COMBO1), L"Trung bình của tồng thể Y");
+		ComboBox_AddString(GetDlgItem(wd, IDC_COMBO1), L"Trung bình của tổng thể X");
+		ComboBox_AddString(GetDlgItem(wd, IDC_COMBO1), L"Trung bình của tổng thể Y");
 		ComboBox_AddString(GetDlgItem(wd, IDC_COMBO1), L"Tỉ lệ của tổng thể");
-		ComboBox_AddString(GetDlgItem(wd, IDC_COMBO1), L"Phương sai của tổng thể");
 		ComboBox_AddString(GetDlgItem(wd, IDC_COMBO1), L"Hệ số a của đường hồi quy");
 		return 0;
 	}
@@ -63,6 +62,20 @@ BOOL CALLBACK Dlg7Proc(HWND wd, UINT id, WPARAM w, LPARAM l)
 							snprintf(temp, 10, "%g", (1 - dTemp) / 2);
 							double out = PhanPhoi("normal", dulieu.size() - 1, temp);
 							SetWindowTextA(GetDlgItem(wd, IDC_STATIC2), XuatPhanPhoi(out, ey, dlcy));
+						}
+						else {
+							if (ComboBox_GetCurSel(GetDlgItem(wd, IDC_COMBO1)) == 2) {
+								char temp[10];
+								GetWindowTextA(GetDlgItem(wd, IDC_EDIT1), temp, 10);
+								double dTemp = atof(temp);
+								snprintf(temp, 10, "%g", (1 - dTemp) / 2);
+								double out = PhanPhoi("normal", dulieu.size() - 1, temp);
+								double p;
+								char a[10];
+								GetWindowTextA(GetDlgItem(wd, IDC_EDIT2), a, 10);
+								p = atof(a);
+								SetWindowTextA(GetDlgItem(wd, IDC_STATIC2), XuatPhanPhoi(out, p, sqrt(p*(1 - p))));
+							}
 						}
 					}
 				}
